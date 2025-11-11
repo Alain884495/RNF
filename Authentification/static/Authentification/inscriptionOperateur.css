@@ -1,0 +1,194 @@
+:root {
+    --bg1: #0f172a;
+    --bg2: #0b3a5b;
+    --card: #ffffff;
+    --accent: #1fb6ff;
+    --muted: #6b7280;
+    --success: #10b981;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    color: #0b1220;
+}
+
+.container {
+    width: 100%;
+    max-width: 700px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+    padding: 28px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.container h2 {
+    font-size: 20px;
+    color: #06263a;
+    margin-bottom: 18px;
+    line-height: 1.2;
+}
+
+.login-form {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 6px;
+    user-select: none;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ced6dd;
+    background: white;
+    font-size: 14px;
+    color: #052035;
+    transition: box-shadow .15s ease, border-color .15s ease;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 4px 14px rgba(31, 182, 255, 0.15);
+}
+
+button[type="submit"] {
+    margin-top: 6px;
+    width: 100%;
+    padding: 10px 14px;
+    background: linear-gradient(90deg, var(--accent), #0ea5a4);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(15, 182, 255, 0.18);
+    transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(15, 182, 255, 0.22);
+}
+
+.signup-links {
+    margin-top: 14px;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.signup-links a {
+    font-size: 13px;
+    color: #0b556a;
+    text-decoration: none;
+    padding: 8px 10px;
+    border-radius: 8px;
+    transition: background .12s ease, color .12s ease;
+}
+
+.signup-links a:hover {
+    background: rgba(11, 85, 106, 0.06);
+}
+
+@media (max-width:480px) {
+    .container {
+        padding: 18px;
+        border-radius: 10px;
+    }
+
+    .container h2 {
+        font-size: 18px;
+    }
+}
+
+
+/* ...existing code... */
+
+/* Layout pour placer plusieurs input sur la même ligne */
+.form-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+/* chaque .input-group dans une .form-row partage l'espace */
+.form-row .input-group {
+    flex: 1;
+    /* prend la même largeur */
+    min-width: 0;
+    /* évite overflow des inputs */
+}
+
+/* classes utilitaires pour colonnes plus petites si besoin */
+.col-50 {
+    flex: 0 0 50%;
+}
+
+/* fixe ~50% */
+.col-33 {
+    flex: 0 0 33.333%;
+}
+
+/* 3 colonnes */
+.col-auto {
+    flex: 0 0 auto;
+}
+
+/* responsive : sur petits écrans, empiler */
+@media (max-width:600px) {
+    .form-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* .....alert */
+
+.alert-box{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translateX(-50%);
+  background:#fff3cd;
+  color:#856404;
+  border:1px solid #ffeaa7;
+  border-radius:6px;
+  padding:12px 24px;
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-family:sans-serif;
+  font-size:14px;
+  transition:opacity .3s;
+}
+.alert-box.hidden{display:none;}
+.alert-box.error{background:#f8d7da;color:#721c24;border-color:#f5c6cb;}
+.alert-box.success{background:#d4edda;color:#155724;border-color:#c3e6cb;}
+#customAlertClose{background:none;border:none;font-size:20px;cursor:pointer;line-height:1;}

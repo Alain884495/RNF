@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{% static 'Authentification/inscriptionFonctionnaire.css' %}"
+    />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Inscription Fonctionnaire</h2>
+      <form
+        method="post"
+        action="{% url 'Authentification:inscription_fonctionnaire' %}"
+        class="login-form"
+      >
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="input-group">
+            <label for="username">Nom d'utilisateur:</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value="{{request.POST.username|default:''|escape }}"
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="password">Mot de passe:</label>
+            <input type="password" id="password" name="password" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="input-group">
+            <label for="first_name">Nom:</label>
+            <input
+              type="text"
+              id="first_name"
+              name="first_name"
+              value="{{request.POST.first_name|default:''|escape }}"
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="last_name">Prénom:</label>
+            <input
+              type="text"
+              id="last_name"
+              name="last_name"
+              value="{{request.POST.last_name|default:''|escape }}"
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="input-group">
+            <label for="matricule">Numéro matricule:</label>
+            <input
+              type="text"
+              id="matricule"
+              name="matricule"
+              value="{{request.POST.matricule|default:''|escape }}"
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="fonction">Fonction:</label>
+            <input
+              type="text"
+              id="fonction"
+              name="fonction"
+              value="{{request.POST.fonction|default:''|escape }}"
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="input-group">
+            <label for="role">Rôle:</label>
+            <input
+              type="text"
+              id="role"
+              name="role"
+              value="{{request.POST.role|default:''|escape }}"
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="service">service:</label>
+            <input
+              type="text"
+              id="service"
+              name="service"
+              value="{{request.POST.service|default:''|escape }}"
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="input-group">
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value="{{request.POST.email|default:''|escape }}"
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="phone">Numéro de téléphone:</label>
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              value="{{request.POST.phone|default:''|escape }}"
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="input-group">
+            <label for="adres_pro">Adresse:</label>
+            <input
+              type="text"
+              id="adres_pro"
+              name="adres_pro"
+              value="{{request.POST.adres_pro|default:''|escape }}"
+            />
+          </div>
+        </div>
+
+        <button type="submit">S'inscrire</button>
+      </form>
+      <div class="signup-links">
+        <a href="{% url 'Authentification:index' %}"> Se connecter</a>
+      </div>
+    </div>
+
+    <div id="customAlert" class="alert-box hidden">
+      <span id="customAlertMsg"></span>
+      <button id="customAlertClose">&times;</button>
+    </div>
+  </body>
+
+  <script>
+        // Fonction unique à appeler partout
+        function customAlert(msg, type = 'info', seconds = 4) {
+          const box = document.getElementById('customAlert');
+          const msgEl = document.getElementById('customAlertMsg');
+          const close = document.getElementById('customAlertClose');
+
+          msgEl.textContent = msg;
+          box.classList.remove('hidden', 'error', 'success');
+          box.classList.add(type);          // type = 'info' | 'error' | 'success'
+
+          // Fermeture auto après X secondes
+          const timer = setTimeout(() => box.classList.add('hidden'), seconds * 1000);
+
+          // Fermeture manuelle
+          close.onclick = () => {
+            clearTimeout(timer);
+            box.classList.add('hidden');
+          };
+        }
+        // Affiche les messages Django si présents
+    {% if messages %}
+          {% for m in messages %}
+            {% if 'success' in m.tags %}
+              customAlert('{{ m|escapejs }}', 'success', 5);
+            {% else %}
+              customAlert('{{ m|escapejs }}', 'error', 3);
+            {% endif %}
+          {% endfor %}
+    {% endif %}
+  </script>
+</html>

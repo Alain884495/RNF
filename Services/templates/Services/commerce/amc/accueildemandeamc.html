@@ -1,0 +1,13 @@
+{% extends 'Services/commerce/referencePage.html' %}
+{% load static %}
+
+{% block nav %}
+    <a href="{% url "Services:rechercherdemandeamc" %}">Recherche</a>
+    <a href={% url "Services:creerdemandeamc" %}>Créer</a>
+    <a href="{% url "Services:modifierdemandeamc" %}">Modifier</a>
+    <a href="{% url "Services:supprimerdemandeamc" %}">Supprimer</a>
+{% endblock %}
+
+{% block content %}
+    AMC
+{% endblock %}

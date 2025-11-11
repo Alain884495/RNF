@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'Services/styles.css' %}">
+    {% block extra_css %}{% endblock %}
+    <title>
+        {% block title %}
+        Reference
+        {% endblock %}
+    </title>
+</head>
+
+<body>
+    <div class="menubar">
+        <div class="left">
+            <a href="{% url 'Services:accueilCommerce' %}">ACCUEIL</a>
+        </div>
+        <div class="center">
+            <a href="{% url 'Services:accueildemandeamc' %}">AMC</a>
+            <a href="{% url 'Services:cipens'%}">CIPENS</a>
+            <a href="{% url 'Services:agrement' %}">AGREMENT MAGASIN</a>
+        </div>
+        <div class="right">
+            <form action="{% url 'Authentification:deconnexion' %}" method="post" class="bouton-deconnexion">
+                {% csrf_token %}
+                <button type="submit">
+                    <svg class="icon-porte" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.59L17 17l5-5-5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
+                    </svg>
+                    Logout
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="nav"> <!-- les liens de navigations -->
+            {% block nav %} {% endblock%}
+        </div>
+
+        <div class="content">
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+
+
+    <div class="footer">
+        <p>&copy; 2024 Services Inc. All rights reserved.</p>
+    </div>
+
+
+    <div id="popup">
+        {% block popup %} {% endblock %}
+    </div>
+
+    {% block scripts %}
+    
+    {% endblock %}
+</body>
+
+</html>

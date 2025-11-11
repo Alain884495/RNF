@@ -1,0 +1,297 @@
+/* ---------- TABLE ---------- */
+.amc-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-family: system-ui, sans-serif;
+    font-size: 0.95rem;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .08);
+}
+
+/*---------- CAPTION ---------- */
+.amc-caption {
+    caption-side: top;
+    /* place la légende au-dessus du tableau */
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+}
+
+/* ---------- CELLULES ---------- */
+.amc-table .amc-header,
+.amc-row-operator td{
+    padding: .5rem 1rem;
+    border: 1px solid #e2e8f0;
+    vertical-align: top;
+}
+
+/* ---------- LIGNES REF / NUM ---------- */
+.amc-row-ref,
+.amc-row-num {
+    background: #f8fafc;
+}
+
+.amc-label-ref, .amc-label-num{
+    width: 100%;        /* prend toute la largeur de la cellule */
+    height: 100%;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #334155;
+    background-color: white;
+    text-align: center;
+    border: none;
+    display: block;          /* ou inline-block si vous préférez */   
+}
+
+.amc-cell-label {
+    width: 10%;
+    font-weight: 600;
+    color: #334155;
+    padding: .5rem 1rem;
+}
+
+.amc-cell-value {
+    width: 40%;
+    color: #0f172a;
+    padding: 0;
+}
+
+.amc-cell-empty {
+    border: none;
+    background: transparent;
+}
+
+/* ---------- ENTÊTE ---------- */
+.amc-header-row .amc-header {
+    background: #0ea5e9;
+    /* couleur primaire (ex. sky-500) */
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+/* ---------- COLONNE OPERATEUR ---------- */
+.amc-cell-operator {
+    background: #fff;
+}
+
+.info-operateur {
+    margin: 0 0 1rem;
+}
+
+.info-operateur:last-child {
+    margin-bottom: 0;
+}
+
+.info-operateur .amc-label,
+.info-produit .amc-label {
+    display: block;
+    margin-bottom: .25rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+.amc-input {
+    width: 100%;
+    padding: .5rem .75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    transition: border-color .2s;
+}
+
+.amc-cell-bouton {
+    padding: 0;
+    /* éventuellement retirer le padding de la cellule */
+}
+
+.amc-button {
+    width: 100%;        /* prend toute la largeur de la cellule */
+    box-sizing: border-box; /* inclut padding/border dans la largeur */
+    padding: .5rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.amc-button:hover {
+    transform: translate(0px, -2px);
+}
+
+.amc-input:focus {
+    outline: none;
+    border-color: #0ea5e9;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, .15);
+}
+
+/* ---------- COLONNE PRODUIT ---------- */
+.amc-cell-produit {
+    background: #fff;
+}
+
+.info-produit {
+    margin: 0 0 1rem;
+}
+
+.info-produit:last-child {
+    margin-bottom: 0;
+}
+
+.quantite-unite {
+    display: flex;
+    gap: .5rem;
+}
+
+.quantite-unite .amc-input:first-child {
+    flex: 2;
+}
+
+.quantite-unite .amc-input:last-child {
+    flex: 1;
+}
+
+/* ------------ POPUP-------------------- */
+.popup-container{
+    width: 900px;
+    height: 500px;
+    max-height: 500px;
+    background-color: #0ea5e9;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 6px 6px 10px black;
+}
+
+.popup-header{
+    top: 0;
+    background-color: #475569;
+    flex: 0 0 auto;
+    padding: 0.5rem;
+}
+
+.popup-header h3{
+    text-align: center;
+    color: #0f172a;
+    text-transform: uppercase;
+}
+
+.popup-header input{
+    width: 220px;
+    max-width: 100%;
+    padding: .4rem .6rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: .9rem;
+    transition: border-color 2s;
+    color: black;
+}
+
+.popup-header label{
+    color: black;
+    font-size: 1.1rem;
+}
+/* content popup */
+.popup-content{
+    background-color: #f2f8f7;
+    margin: 0;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.popup-table{
+    border-collapse: collapse;
+}
+
+.table-header{
+    top: 0;
+    position: sticky;
+    background-color: rgb(199, 194, 194);
+
+}
+
+.table-header th{
+    border: 1px solid black;
+}
+
+.table-content{
+    text-align: center;
+    cursor: pointer;
+}
+
+.table-content td{
+    border: 1px solid white
+}
+
+.table-content:nth-child(even) { background: #f2f2f2; }
+.table-content:nth-child(odd)  { background: #fff; }
+
+.table-content.selected {
+    background: #4a7daf !important; /* remplace la couleur zébrée */
+    color: white;
+    transition: background 0.3s ease; /* animation douce */
+}
+
+.table-content:hover{
+    background: #8cbb9e;
+
+}
+
+
+/* footer popup  */
+.popup-annuler, .popup-valider{
+    padding: .5rem 1.25rem;
+    border: none;
+    border-radius: 4px;
+    font-size: .9rem;
+    cursor: pointer;
+    transition: background .2s;
+    background: #3b82f6;
+    color: #fff;
+}
+
+.popup-annuler:active, .popup-valider:active{
+    background: #cdcfd1;
+}
+
+.popup-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .75rem 1.25rem;
+    background: #f2f4f7;
+    border-top: 1px solid #dcdfe3
+}
+
+
+
+
+
+
+
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+
+    .amc-table,
+    .amc-table thead,
+    .amc-table tbody,
+    .amc-table th,
+    .amc-table td,
+    .amc-table tr {
+        display: block;
+    }
+
+    .amc-header-row {
+        display: none;
+    }
+
+    .amc-cell-operator,
+    .amc-cell-produit {
+        width: 100%;
+    }
+}
