@@ -33,7 +33,8 @@ def index(request):
             elif Operateur.seConnecter(request, username, password):
                 print("Operateur")
             else:
-                messages.error(request, "Nom d'utilisateur ou mot de passe incorrect.")
+                print("Alert")
+                messages.error(request, "Login ou mot de passe incorrect.")
                 return render(request, "Authentification/index.html")
     return render(request, "Authentification/index.html")
 

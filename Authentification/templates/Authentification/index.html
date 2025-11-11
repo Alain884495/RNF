@@ -27,5 +27,41 @@
             <a href="{% url 'Authentification:inscription_fonctionnaire' %}">Inscription Fonctionnaire</a>
             <a href="{% url 'Authentification:inscription_operateur' %}">Inscription Opérateur</a>
         </div>
+
+        <div id="customAlert" class="alert-box hidden">
+            <span id="customAlertMsg"></span>
+            <button id="customAlertClose">&times;</button>
+        </div>
 </body>
+<script>
+        // Fonction unique à appeler partout
+    function customAlert(msg, type = 'info', seconds = 4) {
+        const box = document.getElementById('customAlert');
+        const msgEl = document.getElementById('customAlertMsg');
+        const close = document.getElementById('customAlertClose');
+
+        msgEl.textContent = msg;
+        box.classList.remove('hidden', 'error', 'success');
+        box.classList.add(type);          // type = 'info' | 'error' | 'success'
+
+        // Fermeture auto après X secondes
+        const timer = setTimeout(() => box.classList.add('hidden'), seconds * 1000);
+
+        // Fermeture manuelle
+        close.onclick = () => {
+            clearTimeout(timer);
+            box.classList.add('hidden');
+        };
+    }
+        // Affiche les messages Django si présents
+    {% if messages %}
+          {% for m in messages %}
+            {% if 'success' in m.tags %}
+              customAlert('{{ m|escapejs }}', 'success', 5);
+            {% else %}
+              customAlert('{{ m|escapejs }}', 'error', 3);
+            {% endif %}
+          {% endfor %}
+    {% endif %}
+  </script>
 </html>
