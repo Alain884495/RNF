@@ -41,6 +41,29 @@ class Certificat(models.Model):
     class Meta:
         abstract = True
 
+    @classmethod
+    def creerCertificat(cls, **kwargs):
+        certificat = cls(**kwargs)
+        certificat.save()
+        return certificat
+
+    @classmethod
+    def modifierCertificat(cls, **kwargs):
+        certificat = cls(**kwargs)
+        certificat.save()
+        return certificat
+
+    @classmethod
+    def supprimerCertificat(cls, **kwargs):
+        certificat = cls(**kwargs)
+        certificat.delete()
+        return certificat
+
+    @classmethod
+    def chercherCertificat(cls, **kwargs):
+        certificat = cls(**kwargs)
+        return certificat
+
 
 class CertificatAMC(Certificat):
     nomMarchandise = models.CharField(max_length=40, blank=True, null=True)
