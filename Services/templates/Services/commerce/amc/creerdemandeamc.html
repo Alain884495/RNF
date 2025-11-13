@@ -9,13 +9,13 @@
     <table class="amc-table">
         <caption class="amc-caption">CREER DEMANDE AMC</caption>
         <tr class="amc-row-ref">
-            <td class="amc-cell-label"><label class="amc-label">Ref :</label></td>
-            <td class="amc-cell-value"><label class="amc-label-ref">ref</label></td>
+            <td class="amc-cell-label"><label class="amc-label" for="ref">Ref :</label></td>
+            <td class="amc-cell-value"><input class="amc-input" type="text" id="ref" name="ref" value="{{ form_data.ref|default:'' }}"/></td>
             <td class="amc-cell-empty" rowspan="2"></td>
         </tr>
         <tr class="amc-row-num">
             <td class="amc-cell-label"><label class="amc-label">Num :</label></td>
-            <td class="amc-cell-value"><label class="amc-label-num">num</label></td>
+            <td class="amc-cell-value"><label class="amc-label-num">{{ sigleamc }}</label></td>
         </tr>
         <tr class="amc-header-row">
             <th class="amc-header" colspan="2">OPERATEUR</th>

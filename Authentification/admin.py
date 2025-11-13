@@ -9,7 +9,7 @@ class OperateurAdmin(admin.ModelAdmin):
     list_display = ("user", "nif", "stat", "raisonSociale", "phone", "adresse")
     search_fields = ("nif", "raisonSociale", "user__username", "user__email", "phone")
     list_filter = ("stat",)
-    ordering = ("nif",)
+    ordering = ("user",)
     raw_id_fields = ("user",)  # préférable si beaucoup d'utilisateurs
     readonly_fields = ()
     fieldsets = (

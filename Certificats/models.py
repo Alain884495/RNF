@@ -77,3 +77,15 @@ class CertificatAMC(Certificat):
         if self.numero:
             return f"AMC {self.numero} - {self.nomMarchandise or 'Sans nom'}"
         return f"AMC (ID: {self.id}) - {self.nomMarchandise or 'Sans nom'}"
+
+
+class Sigle(models.Model):
+    sigleCertificatamc = models.CharField(
+        max_length=50, unique=True, blank=True, null=True
+    )
+    sigleAgrementppn = models.CharField(
+        max_length=50, unique=True, blank=True, null=True
+    )
+
+    def __str__(self):
+        return self.sigleCertificatamc

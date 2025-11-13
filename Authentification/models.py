@@ -101,7 +101,7 @@ class Operateur(models.Model):
         abstract = False
 
     def __str__(self):
-        return self.nif
+        return self.raisonSociale
 
     @classmethod
     def inscription(

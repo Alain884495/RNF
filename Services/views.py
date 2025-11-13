@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from Authentification.models import Operateur
-from Certificats.models import CertificatAMC
+from Certificats.models import CertificatAMC, Sigle
 from Services.models import ServiceCommerce
 from django.contrib.auth import authenticate, login, logout
 from Authentification.models import Agent
 from django.utils import timezone
+from django.db.models import Max
 
 
 def accueilCommerce(request):
@@ -18,12 +19,17 @@ def accueildemandeamc(request):
 
 def creerdemandeamc(request):
     operateurs = Operateur.objects.all()
+    sigle = Sigle.objects.get(id=1)
+    numeroamc = CertificatAMC.objects.count() + 1
+    sigleamc = str(numeroamc).zfill(2)
+    sigleamc = f"{sigleamc}{sigle.sigleCertificatamc}"
 
     # Contexte de base
-    context = {"operateurs": operateurs}
+    context = {"operateurs": operateurs, "sigle": sigle, "sigleamc": sigleamc}
 
     if request.method == "POST":
         # Récupération des données
+        ref = request.POST.get("ref", "").strip()
         raisonSociale = request.POST.get("raison-sociale", "").strip()
         nif = request.POST.get("nif", "").strip()
         stat = request.POST.get("stat", "").strip()
@@ -36,6 +42,7 @@ def creerdemandeamc(request):
 
         # Ajout des données au contexte pour les conserver
         context["form_data"] = {
+            "ref": ref,
             "raison_sociale": raisonSociale,
             "nif": nif,
             "stat": stat,
@@ -50,6 +57,7 @@ def creerdemandeamc(request):
         # Validation
         if all(
             [
+                ref,
                 raisonSociale,
                 nif,
                 stat,
@@ -63,6 +71,8 @@ def creerdemandeamc(request):
         ):
             # Traitement réussi
             CertificatAMC.creerCertificat(
+                reference=ref,
+                numero=sigleamc,
                 service=ServiceCommerce.objects.get(nomService="commerce"),
                 operateur=Operateur.objects.get(raisonSociale=raisonSociale),
                 agent=Agent.objects.get(user=request.user),
@@ -79,6 +89,8 @@ def creerdemandeamc(request):
         else:
             # Identification des champs vides
             champs_vides = []
+            if not ref:
+                champs_vides.append("Ref")
             if not raisonSociale:
                 champs_vides.append("Raison Sociale")
             if not nif:

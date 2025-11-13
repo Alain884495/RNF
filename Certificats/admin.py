@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CertificatAMC
+from .models import CertificatAMC, Sigle
 
 
 class CertificatAdmin(admin.ModelAdmin):
@@ -27,4 +27,9 @@ class CertificatAdmin(admin.ModelAdmin):
     readonly_fields = ()
 
 
+class SigleAdmin(admin.ModelAdmin):
+    list_display = ("id", "sigleCertificatamc", "sigleAgrementppn")
+
+
 admin.site.register(CertificatAMC, CertificatAdmin)
+admin.site.register(Sigle, SigleAdmin)
