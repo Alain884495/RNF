@@ -38,3 +38,25 @@ raison_sociale.addEventListener('click', function(e) {
 annuler.addEventListener('click', function(e){
     popup.classList.remove('active');
 });
+
+
+
+ // Fonction Alert
+function customAlert(msg, type = 'info', seconds = 4) {
+    const box = document.getElementById('customAlert');
+    const msgEl = document.getElementById('customAlertMsg');
+    const close = document.getElementById('customAlertClose');
+
+    msgEl.textContent = msg;
+    box.classList.remove('hidden', 'error', 'success');
+    box.classList.add(type);          // type = 'info' | 'error' | 'success'
+
+    // Fermeture auto après X secondes
+    const timer = setTimeout(() => box.classList.add('hidden'), seconds * 1000);
+
+    // Fermeture manuelle
+    close.onclick = () => {
+        clearTimeout(timer);
+        box.classList.add('hidden');
+    };
+}

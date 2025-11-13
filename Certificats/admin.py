@@ -4,8 +4,10 @@ from .models import CertificatAMC
 
 class CertificatAdmin(admin.ModelAdmin):
     list_display = (
+        "id",
         "numero",
         "reference",
+        "service",
         "etat",
         "operateur",
         "agent",
@@ -13,6 +15,10 @@ class CertificatAdmin(admin.ModelAdmin):
         "tresorier",
         "directeur",
         "dateDemande",
+        "nomMarchandise",
+        "paysOrigine",
+        "quantite",
+        "unite",
     )
     search_fields = ("numero",)
     list_filter = ("etat",)

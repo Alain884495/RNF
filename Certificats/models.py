@@ -13,8 +13,10 @@ from Authentification.models import (
 class Certificat(models.Model):
     numero = models.CharField(max_length=20, unique=True, blank=True, null=True)
     reference = models.CharField(max_length=20, blank=True, null=True)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
-    object_id = models.PositiveIntegerField()
+    content_type = models.ForeignKey(
+        ContentType, on_delete=models.CASCADE, null=True, blank=True
+    )
+    object_id = models.PositiveIntegerField(null=True, blank=True)
     service = GenericForeignKey("content_type", "object_id")
     operateur = models.ForeignKey(
         Operateur, on_delete=models.DO_NOTHING, blank=True, null=True
@@ -72,4 +74,6 @@ class CertificatAMC(Certificat):
     unite = models.CharField(max_length=10, blank=True, null=True)
 
     def __str__(self):
-        return f"{super().__str__()} (AMC: {self.numero_amc})"
+        if self.numero:
+            return f"AMC {self.numero} - {self.nomMarchandise or 'Sans nom'}"
+        return f"AMC (ID: {self.id}) - {self.nomMarchandise or 'Sans nom'}"
