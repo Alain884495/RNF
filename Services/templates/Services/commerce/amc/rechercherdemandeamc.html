@@ -1,4 +1,8 @@
 {% extends 'Services/commerce/amc/accueildemandeamc.html' %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'Services/rechercherdemandeamc.css' %}">
+{% endblock %}
 
 {% block content %}
     RECHERCHER DEMANDE AMC
