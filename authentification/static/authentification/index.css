@@ -1,0 +1,104 @@
+/* Styles pour le corps de la page */
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+/* Carte de connexion */
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* En-tête de la carte */
+.card-body {
+    padding: 2.5rem;
+}
+
+/* Icône utilisateur */
+.fa-user-circle {
+    color: #4e73df;
+}
+
+/* Bouton de connexion */
+.btn-primary {
+    background-color: #4e73df;
+    border: none;
+    padding: 0.6rem;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #2e59d9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(78, 115, 223, 0.3);
+}
+
+/* Champs de formulaire */
+.form-control, .input-group-text {
+    padding: 0.75rem 1rem;
+    border-radius: 0.35rem;
+}
+
+.input-group-text {
+    background-color: #f8f9fc;
+    border-right: none;
+}
+
+.form-control:focus {
+    border-color: #bac8f3;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+/* Bouton afficher/masquer le mot de passe */
+#togglePassword {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none;
+}
+
+/* Liens */
+a {
+    color: #4e73df;
+    transition: all 0.3s;
+}
+
+a:hover {
+    color: #224abe;
+    text-decoration: none;
+}
+
+/* Pied de page */
+.small {
+    font-size: 0.85rem;
+}
+
+/* Animation de chargement */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
