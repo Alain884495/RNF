@@ -1,0 +1,38 @@
+{% extends 'service/commerce/accueilCommerce.html' %}
+{% load static %}
+
+{% block title %}Accueil CIPENS{% endblock title %}
+
+{% block nav %}
+    <div class="bg-light border-end" style="width: 250px; min-height: calc(100vh - 56px);">
+        <div class="p-3">
+            <h5 class="text-center mb-4">Menu CIPENS</h5>
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item mb-2">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'rechercherDemandeCipens' %}active{% endif %}" 
+                       href="{% url 'service:rechercherDemandeCipens' %}">
+                        <i class="bi bi-search me-2"></i>Recherche
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'creerDemandeCipens' %}active{% endif %}" 
+                       href="{% url 'service:creerDemandeCipens' %}">
+                        <i class="bi bi-plus-circle me-2"></i>Créer
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'modifierDemandeCipens' %}active{% endif %}" 
+                       href="{% url 'service:modifierDemandeCipens' %}">
+                        <i class="bi bi-pencil-square me-2"></i>Modifier
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'supprimerDemandeCipens' %}active{% endif %}" 
+                       href="{% url 'service:supprimerDemandeCipens' %}">
+                        <i class="bi bi-trash me-2"></i>Supprimer
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock nav %}

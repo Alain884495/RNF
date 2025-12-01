@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}ReferencePageCommerce{% endblock title %}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'icons/bootstrap-icons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'service/global.css'%}" />
+    {% block extra_head %}{% endblock extra_head %}
+  </head>
+
+  <body>
+    <header>
+      {% block header %}
+        
+      {% endblock header %}
+    </header>
+    <div class="d-flex flex-grow-1 main-layout">
+      <nav class="flex-shrink-0">
+        {% block nav %}
+          
+        {% endblock nav %}
+      </nav>
+      <section>
+        {% block content %}
+        
+        {% endblock content %}
+      </section>
+    </div>
+    <footer>{% block footer %} {% endblock footer %}</footer>
+    <!-- Bootstrap JS Bundle (includes Popper) -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    {% block script %}
+    <script src="{% static 'service/navigation.js' %}"></script>
+    {% endblock script %}
+  </body>
+</html>

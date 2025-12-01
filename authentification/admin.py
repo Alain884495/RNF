@@ -12,6 +12,9 @@ class FonctionnaireAdmin(admin.ModelAdmin):
     list_filter = ('user', 'matricule', 'role', 'fonction', 'service', 'adresse_pro', 'adresse_perso', 'phone')
     search_fields = ('user', 'matricule', 'role', 'fonction', 'service', 'adresse_pro', 'adresse_perso', 'phone')
     list_per_page = 25
+    def get_list_filter(self, request):
+        return [field.name for field in self.model._meta.fields 
+               if not field.name == 'service' and field.name != 'id']
 
 
 admin.site.register(Operateur, OperateurAdmin)

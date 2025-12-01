@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 
 
 class Operateur(models.Model):
@@ -19,7 +21,9 @@ class Operateur(models.Model):
 
 class Fonctionnaire(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    service = models.CharField(max_length=50)
+    service_content_type = models.ForeignKey(ContentType, on_delete=models.DO_NOTHING, null=True, blank=True)
+    service_content_id = models.PositiveIntegerField(null=True, blank=True)
+    service = GenericForeignKey('service_content_type', 'service_content_id')
     matricule = models.CharField(max_length=20)
     adresse_pro = models.CharField(max_length=100)
     adresse_perso = models.CharField(max_length=100)

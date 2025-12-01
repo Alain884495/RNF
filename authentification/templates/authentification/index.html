@@ -5,9 +5,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - RNF</title>
-    <link rel="stylesheet" href="{% static '/css/output.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'icons/bootstrap-icons.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'authentification/index.css' %}">
 </head>
 <body>
-    <p class="text-3xl font-bold text-blue-600">Connexion</p>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100 py-4">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <div class="avatar">
+                            <i class="bi bi-person-fill fs-1"></i>
+                        </div>
+                        <h2>Connexion</h2>
+                    </div>
+                    
+                    <form method="post" action="{% url 'authentification:index'%}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nom d'utilisateur</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                                <button class="btn border border-start-0 rounded-end" type="button" id="togglePassword">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2 mb-4">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Se connecter
+                            </button>
+                        </div>
+                        
+                        <div class="text-center">
+                            <p class="text-muted mb-3">Pas de compte ? Veuillez vous inscrire</p>
+                            <div class="d-flex justify-content-between">
+                                <a href="{% url 'authentification:inscription_operateur' %}" class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-user-plus me-1"></i>Opérateur
+                                </a>
+                                <a href="{% url 'authentification:inscription_fonctionnaire' %}" class="btn btn-outline-success btn-sm">
+                                    <i class="fas fa-user-tie me-1"></i>Fonctionnaire
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script>
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const password = document.getElementById('password');
+            const icon = this.querySelector('i');
+            
+            if (password.type === 'password') {
+                password.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                password.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        });
+    </script>
 </body>
 </html>

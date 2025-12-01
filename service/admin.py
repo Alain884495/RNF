@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import ServiceCommerce, ServiceConditionnement, ServiceMetrologie
 
-# Register your models here.
+admin.site.register(ServiceCommerce)
+admin.site.register(ServiceConditionnement)
+admin.site.register(ServiceMetrologie)
+

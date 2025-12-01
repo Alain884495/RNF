@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
+
+from service.models import ServiceCommerce
 from .models import Operateur, Ordsec, Agent, Directeur, Tresorier, Sg
+from service.models import ServiceCommerce, ServiceConditionnement, ServiceMetrologie
 from django.contrib.auth.models import User
 from django.contrib import messages 
 
@@ -127,6 +130,21 @@ def inscription_fonctionnaire(request):
             if model_class is None:
                 messages.error(request, "Rôle invalide sélectionné.")
                 return render(request, "authentification/inscription_fonctionnaire.html", locals())
+            
+            service_model_map = {
+                "commerce": ServiceCommerce,
+                "conditionnement": ServiceConditionnement,
+                "metrologie": ServiceMetrologie,
+            }
+
+            service_class = service_model_map.get(service)
+            if service_class is None:
+                messages.error(request, "Service invalide sélectionné.")
+                return render(request, "authentification/inscription_fonctionnaire.html", locals())
+            else:
+                service_instance = service_class.objects.get_or_create(
+                    nom_service=service,
+                )[0]
 
             user = User.objects.create_user(
                 username=username,
@@ -141,7 +159,7 @@ def inscription_fonctionnaire(request):
                 matricule=matricule,
                 role=role,
                 fonction=fonction,
-                service=service,
+                service=service_instance,
                 adresse_pro=adresse_pro,
                 adresse_perso=adresse_perso,
                 phone=phone,

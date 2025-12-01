@@ -1,0 +1,45 @@
+{% extends 'service/commerce/referencePage.html' %}
+{% load static %}
+
+{% block title %}Accueil Commerce{% endblock title %}
+
+{% block header %}
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark p-0">
+    <div class="container-fluid">
+        <span class="navbar-brand fw-bold">
+            <i class="bi bi-shop me-2"></i>Service Commerce
+        </span>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'service:accueilCommerce' %}">
+                        <i class="bi bi-house-door me-1"></i>Accueil
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'service:accueilDemandeamc' %}">
+                        <i class="bi bi-file-earmark-text me-1"></i>AMC
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'service:accueilDemandeAgrement' %}">
+                        <i class="bi bi-shop-window me-1"></i>Agrément Magasin PPN
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'service:accueilDemandeCipens' %}">
+                        <i class="bi bi-people me-1"></i>CIPENS
+                    </a>
+                </li>
+            </ul>
+            <div>
+                <form action="#">
+                    <button class="btn btn-outline-light" type="submit">
+                        <i class="bi bi-box-arrow-right me-1"></i>Déconnexion
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+{% endblock header %}

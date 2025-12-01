@@ -1,0 +1,39 @@
+{% extends 'service/commerce/accueilCommerce.html' %}
+{% load static %}
+
+{% block title %}Accueil AGREMENT PPN{% endblock title %}
+
+{% block nav %}
+    <div class="bg-light border-end" style="width: 250px; min-height: calc(100vh - 56px);">
+        <div class="p-3">
+            <h5 class="text-center mb-4">Menu AGREMENT PPN</h5>
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item mb-2">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'rechercherDemandeAgrement' %}active{% endif %}" 
+                       href="{% url 'service:rechercherDemandeAgrement' %}">
+                        <i class="bi bi-search me-2"></i>Recherche
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'creerDemandeAgrement' %}active{% endif %}" 
+                       href="{% url 'service:creerDemandeAgrement' %}">
+                        <i class="bi bi-plus-circle me-2"></i>Créer
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'modifierDemandeAgrement' %}active{% endif %}" 
+                       href="{% url 'service:modifierDemandeAgrement' %}">
+                        <i class="bi bi-pencil-square me-2"></i>Modifier
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'supprimerDemandeAgrement' %}active{% endif %}" 
+                       href="{% url 'service:supprimerDemandeAgrement' %}">
+                        <i class="bi bi-trash me-2"></i>Supprimer
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock nav %}

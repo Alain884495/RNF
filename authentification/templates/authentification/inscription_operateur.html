@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription operateur</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'icons/bootstrap-icons.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'authentification/index.css' %}">
 </head>
 <body>
@@ -26,7 +25,7 @@
                                 <!-- Colonne de gauche - Informations personnelles -->
                                 <div class="col-md-6">
                                     <h5 class="mb-4 text-primary">
-                                        <i class="fas fa-user-circle me-2"></i>Informations Personnelles
+                                        <i class="bi bi-person me-2"></i>Informations Personnelles
                                     </h5>
                                     
                                     <div class="mb-3">
@@ -47,7 +46,7 @@
                                     <div class="mb-3">
                                         <label for="telephone" class="form-label">Téléphone</label>
                                         <div class="input-group">
-                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                            <span class="input-group-text"><i class="bi bi-telephone"></i></span>
                                             <input type="tel" class="form-control" id="phone_perso" name="phone_perso" value="{{ phone_perso }}">
                                         </div>
                                     </div>
@@ -60,7 +59,7 @@
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Identifiant de connexion</label>
                                         <div class="input-group">
-                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            <span class="input-group-text"><i class="bi bi-person"></i></span>
                                             <input type="text" class="form-control" id="username" name="username"
                                                    minlength="4" maxlength="30" value="{{ username }}" />
                                         </div>
@@ -70,11 +69,11 @@
                                     <div class="mb-3">
                                         <label for="password" class="form-label">Mot de passe</label>
                                         <div class="input-group">
-                                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
                                             <input type="password" class="form-control" id="password" name="password"
                                                    value="{{ password }}" />
                                             <button class="btn border border-start-0 rounded-end" type="button" id="togglePassword">
-                                                <i class="far fa-eye"></i>
+                                                <i class="bi bi-eye"></i>
                                             </button>
                                         </div>
                                         <div class="form-text">Minimum 8 caractères, dont au moins une lettre et un chiffre</div>
@@ -83,7 +82,7 @@
                                     <div class="mb-3">
                                         <label for="confirm_password" class="form-label">Confirmer le mot de passe</label>
                                         <div class="input-group">
-                                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
                                             <input type="password" class="form-control" id="confirm_password" 
                                                    name="confirm_password" value="{{ confirm_password }}"/>
 
@@ -94,7 +93,7 @@
                                 <!-- Colonne de droite - Informations professionnelles -->
                                 <div class="col-md-6">
                                     <h5 class="mb-4 text-primary">
-                                        <i class="fas fa-building me-2"></i>Informations Professionnelles
+                                        <i class="bi bi-building me-2"></i>Informations Professionnelles
                                     </h5>
                                     
                                     <div class="mb-3">
@@ -119,7 +118,7 @@
                                     <div class="mb-3">
                                         <label for="phone_pro" class="form-label">Téléphone professionnel</label>
                                         <div class="input-group">
-                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                            <span class="input-group-text"><i class="bi bi-telephone"></i></span>
                                             <input type="tel" class="form-control" id="phone_pro" name="phone_pro" value="{{ phone_pro }}"/>
                                         </div>
                                     </div>
@@ -134,7 +133,7 @@
                             <div class="row mt-4">
                                 <div class="col-12 position-relative" style="min-height: 40px;">
                                     <a href="{% url 'authentification:index' %}" class="btn btn-outline-secondary position-absolute start-0">
-                                        <i class="fas fa-arrow-left me-2"></i>Retour
+                                        <i class="bi bi-arrow-left me-2"></i>Retour
                                     </a>
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-primary px-4">
@@ -233,7 +232,7 @@
     {% endif %}
 
     <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script>
         document.getElementById('togglePassword').addEventListener('click', function() {
                 const password = document.getElementById('password');
@@ -241,12 +240,12 @@
                 
                 if (password.type === 'password') {
                     password.type = 'text';
-                    icon.classList.remove('fa-eye');
-                    icon.classList.add('fa-eye-slash');
+                    icon.classList.remove('bi-eye');
+                    icon.classList.add('bi-eye-slash');
                 } else {
                     password.type = 'password';
-                    icon.classList.remove('fa-eye-slash');
-                    icon.classList.add('fa-eye');
+                    icon.classList.remove('bi-eye-slash');
+                    icon.classList.add('bi-eye');
                 }
             });
     </script>
