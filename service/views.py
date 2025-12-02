@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from authentification.models import Operateur
 
 def accueilCommerce(request):
     return render(request, 'service/commerce/accueilCommerce.html')
@@ -11,8 +12,8 @@ def accueilDemandeamc(request):
     return render(request, 'service/commerce/amc/accueilDemandeamc.html')
 
 def creerDemandeamc(request):
-    ops = range(1, 10)
-    return render(request, 'service/commerce/amc/creerDemaneamc.html', {'ops':ops})
+    operateurs = Operateur.objects.all().order_by('raison_sociale')
+    return render(request, 'service/commerce/amc/creerDemaneamc.html', {'operateurs':operateurs})
 
 def modifierDemandeamc(request):
     return render(request, 'service/commerce/amc/modifierDemandeamc.html')

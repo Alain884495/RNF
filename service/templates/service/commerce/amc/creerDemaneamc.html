@@ -177,13 +177,13 @@
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    {% for op in ops %}
+                    {% for operateur in operateurs %}
                     <tr class="text-center" style="cursor: pointer;" 
-                        onclick="selectOperator({{ op }}, 'Entreprise {{ op }}', '12345{{ op }}', 'Ville {{ op }}')">
-                        <td>{{ op }}</td>
-                        <td>Entreprise {{ op }}</td>
-                        <td>12345{{ op }}</td>
-                        <td>Ville {{ op }}</td>
+                        onclick="selectOperator({{ forloop.counter }}, '{{ operateur.raison_sociale }}', '{{ operateur.nif }}', '{{ operateur.adresse_pro }}')">
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ operateur.raison_sociale }}</td>
+                        <td>{{ operateur.nif }}</td>
+                        <td>{{ operateur.adresse_pro }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
