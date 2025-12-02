@@ -7,10 +7,12 @@ def referencePage(request):
     return render(request, 'service/commerce/referencePage.html')
 
 def accueilDemandeamc(request):
+    
     return render(request, 'service/commerce/amc/accueilDemandeamc.html')
 
 def creerDemandeamc(request):
-    return render(request, 'service/commerce/amc/creerDemaneamc.html')
+    ops = range(1, 10)
+    return render(request, 'service/commerce/amc/creerDemaneamc.html', {'ops':ops})
 
 def modifierDemandeamc(request):
     return render(request, 'service/commerce/amc/modifierDemandeamc.html')

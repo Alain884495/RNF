@@ -31,6 +31,11 @@
       </section>
     </div>
     <footer>{% block footer %} {% endblock footer %}</footer>
+    <div class="modal-bg" id="popup">
+      <div class="container modal-box" id="popupBox">
+        {% block popup %}  {% endblock popup %}
+      </div>
+    </div>
     <!-- Bootstrap JS Bundle (includes Popper) -->
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     {% block script %}
