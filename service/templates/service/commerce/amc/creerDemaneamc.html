@@ -110,7 +110,7 @@
 
                 <!-- Boutons d'action -->
                 <div class="d-flex justify-content-between align-items-center mt-2">
-                    <a href="#" class="btn btn-secondary">
+                    <a href="{% url 'service:accueilDemandeamc' %}" class="btn btn-secondary">
                         <i class="bi bi-arrow-left"></i> Retour
                     </a>
                     <div class="mx-auto">
@@ -181,9 +181,9 @@
                     <tr class="text-center" style="cursor: pointer;" 
                         onclick="selectOperator({{ forloop.counter }}, '{{ operateur.raison_sociale }}', '{{ operateur.nif }}', '{{ operateur.adresse_pro }}')">
                         <td>{{ forloop.counter }}</td>
-                        <td>{{ operateur.raison_sociale }}</td>
+                        <td class="text-start">{{ operateur.raison_sociale }}</td>
                         <td>{{ operateur.nif }}</td>
-                        <td>{{ operateur.adresse_pro }}</td>
+                        <td class="text-start">{{ operateur.adresse_pro }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
