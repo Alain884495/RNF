@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 from service.models import ServiceCommerce
 from .models import Operateur, Ordsec, Agent, Directeur, Tresorier, Sg
-from service.models import ServiceCommerce, ServiceConditionnement, ServiceMetrologie
+from service.models import DirectionRegionale ,ServiceCommerce, ServiceConditionnement, ServiceMetrologie
 from django.contrib.auth.models import User
 from django.contrib import messages 
 
@@ -89,15 +89,16 @@ def inscription_fonctionnaire(request):
         matricule = request.POST.get("matricule", "").strip()
         role = request.POST.get("role", "").strip()
         fonction = request.POST.get("fonction", "").strip()
+        direction_regionale = request.POST.get("direction_regionale", "").strip()
         service = request.POST.get("service", "").strip()
         adresse_pro = request.POST.get("adresse_pro", "").strip()
         adresse_perso = request.POST.get("adresse_perso", "").strip()
         phone = request.POST.get("phone", "").strip()
 
-        print(adresse_pro)
+        print(direction_regionale)
         if not all([
             nom, prenom, username, email, password, confirm_password,
-            matricule, role, fonction, service, adresse_pro, adresse_perso, phone
+            matricule, role, fonction, direction_regionale, service, adresse_pro, adresse_perso, phone
         ]):
             messages.error(request, "Tous les champs doivent être remplis.")
             return render(request, "authentification/inscription_fonctionnaire.html", locals())
@@ -131,6 +132,10 @@ def inscription_fonctionnaire(request):
                 messages.error(request, "Rôle invalide sélectionné.")
                 return render(request, "authentification/inscription_fonctionnaire.html", locals())
             
+            direction_regionale = DirectionRegionale.objects.get_or_create(
+                nom_direction=direction_regionale,
+            )[0]
+
             service_model_map = {
                 "commerce": ServiceCommerce,
                 "conditionnement": ServiceConditionnement,
@@ -144,7 +149,10 @@ def inscription_fonctionnaire(request):
             else:
                 service_instance = service_class.objects.get_or_create(
                     nom_service=service,
+                    direction_regionale=direction_regionale,
                 )[0]
+
+            
 
             user = User.objects.create_user(
                 username=username,

@@ -110,7 +110,38 @@
                                     </div>
                                     
                                     <div class="mb-3">
-                                        <label for="service" class="form-label">Service/Direction</label>
+                                        <label for="direction_regionale" class="form-label">Direction régionale</label>
+                                        <select name="direction_regionale" class="form-select form-control" id="direction_regionale" required>
+                                            <option value="" disabled {% if not direction_regionale %}selected{% endif %}>-- Sélectionnez la Direction régionale --</option>
+                                            <option value="alaotra_mangoro" {% if direction_regionale == 'alaotra_mangoro' %}selected{% endif %}>Alaotra-Mangoro</option>
+                                            <option value="amoron'i_mania" {% if direction_regionale == 'amoron_i_mania' %}selected{% endif %}>Amoron'i Mania</option>
+                                            <option value="analakanga" {% if direction_regionale == 'analakanga' %}selected{% endif %}>Analakanga</option>
+                                            <option value="analamanga" {% if direction_regionale == 'analamanga' %}selected{% endif %}>Analamanga</option>
+                                            <option value="analanjirofo" {% if direction_regionale == 'analanjirofo' %}selected{% endif %}>Analanjirofo</option>
+                                            <option value="androy" {% if direction_regionale == 'androy' %}selected{% endif %}>Androy</option>
+                                            <option value="anôsy" {% if direction_regionale == 'anôsy' %}selected{% endif %}>Anôsy</option>
+                                            <option value="atsimo_andrefana" {% if direction_regionale == 'atsimo_andrefana' %}selected{% endif %}>Atsimo-Andrefana</option>
+                                            <option value="atsimo_atsinanana" {% if direction_regionale == 'atsimo_atsinanana' %}selected{% endif %}>Atsimo-Atsinanana</option>
+                                            <option value="atsinanana" {% if direction_regionale == 'atsinanana' %}selected{% endif %}>Atsinanana</option>
+                                            <option value="betsiboka" {% if direction_regionale == 'betsiboka' %}selected{% endif %}>Betsiboka</option>
+                                            <option value="boeny" {% if direction_regionale == 'boeny' %}selected{% endif %}>Boeny</option>
+                                            <option value="bongolava" {% if direction_regionale == 'bongolava' %}selected{% endif %}>Bongolava</option>
+                                            <option value="diana" {% if direction_regionale == 'diana' %}selected{% endif %}>Diana</option>
+                                            <option value="fitovinany" {% if direction_regionale == 'fitovinany' %}selected{% endif %}>Fitovinany</option>
+                                            <option value="haute_matsiatra" {% if direction_regionale == 'haute_matsiatra' %}selected{% endif %}>Haute Matsiatra</option>
+                                            <option value="ihorombe" {% if direction_regionale == 'ihorombe' %}selected{% endif %}>Ihorombe</option>
+                                            <option value="itasy" {% if direction_regionale == 'itasy' %}selected{% endif %}>Itasy</option>
+                                            <option value="melaky" {% if direction_regionale == 'melaky' %}selected{% endif %}>Melaky</option>
+                                            <option value="menabe" {% if direction_regionale == 'menabe' %}selected{% endif %}>Menabe</option>
+                                            <option value="sava" {% if direction_regionale == 'sava' %}selected{% endif %}>Sava</option>
+                                            <option value="sofia" {% if direction_regionale == 'sofia' %}selected{% endif %}>Sofia</option>
+                                            <option value="vakinankaratra" {% if direction_regionale == 'vakinankaratra' %}selected{% endif %}>Vakinankaratra</option>
+                                            <option value="vatovavy" {% if direction_regionale == 'vatovavy' %}selected{% endif %}>Vatovavy</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="service" class="form-label">Service</label>
                                         <input type="text" class="form-control" id="service" name="service" value="{{ service }}">
                                     </div>
                                     
