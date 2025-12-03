@@ -10,7 +10,7 @@
             <h3 class="card-title text-center mb-0">Créer une nouvelle demande AMC</h3>
         </div>
         <div class="card-body">
-            <form action="#" method="post" class="needs-validation" novalidate>
+            <form action="{% url 'service:creerDemandeamc' %}" method="post" class="needs-validation" novalidate>
                 {% csrf_token %}
                 
                 <!-- En-tête du formulaire -->
@@ -18,13 +18,13 @@
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
                             <label class="form-label fw-bold">Demande N°</label>
-                            <input type="text" class="form-control" value="Numéro demande AMC" disabled>
+                            <input type="text" class="form-control bg-light" value="{{ numeroCertificat }}{{ sigle.sigle_amc }}" id="demandeN" name="demandeN" readonly>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
                             <label for="reference" class="form-label fw-bold">Référence</label>
-                            <input type="text" class="form-control" id="reference" required>
+                            <input type="text" class="form-control" id="reference" name="reference" required>
                             <div class="invalid-feedback">
                                 Veuillez saisir une référence.
                             </div>
@@ -42,21 +42,21 @@
                             <div class="card-body">
                                 <div class="mb-3">
                                     <label for="raisonSociale" class="form-label">Raison Sociale</label>
-                                    <input onclick="openPopup()" type="text" class="form-control" id="raisonSociale" required>
+                                    <input onclick="openPopup()" type="text" class="form-control" id="raisonSociale" name="raisonSociale" required autocomplete="off" autocorrect="off" spellcheck="false">
                                     <div class="invalid-feedback">
                                         Ce champ est obligatoire.
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="nif" class="form-label">NIF</label>
-                                    <input type="text" class="form-control" id="nif" required>
+                                    <input type="text" class="form-control" id="nif" name="nif" required>
                                     <div class="invalid-feedback">
                                         Veuillez saisir le NIF.
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="adresse" class="form-label">Adresse Professionnelle</label>
-                                    <textarea class="form-control" id="adresse" rows="2" required></textarea>
+                                    <textarea class="form-control" id="adresse" rows="2" name="adresse" required></textarea>
                                     <div class="invalid-feedback">
                                         Veuillez saisir l'adresse professionnelle.
                                     </div>
@@ -74,14 +74,14 @@
                             <div class="card-body">
                                 <div class="mb-3">
                                     <label for="produit" class="form-label">Produits</label>
-                                    <input type="text" class="form-control" id="produit" required>
+                                    <input type="text" class="form-control" id="produit" name="produit" required>
                                     <div class="invalid-feedback">
                                         Veuillez spécifier le produit.
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="pays" class="form-label">Pays d'origine</label>
-                                    <input type="text" class="form-control" id="pays" required>
+                                    <input type="text" class="form-control" id="pays" name="pays" required>
                                     <div class="invalid-feedback">
                                         Veuillez indiquer le pays d'origine.
                                     </div>
@@ -89,11 +89,11 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <label for="quantite" class="form-label">Quantité</label>
-                                        <input type="number" class="form-control" id="quantite" required>
+                                        <input type="number" class="form-control" id="quantite" name="quantite" required>
                                     </div>
                                     <div class="col-6">
                                         <label for="unite" class="form-label">Unité</label>
-                                        <select class="form-select" id="unite" required>
+                                        <select class="form-select" id="unite" name="unite" required>
                                             <option value="">Sélectionner...</option>
                                             <option value="kg">kg</option>
                                             <option value="g">g</option>
@@ -126,6 +126,91 @@
         </div>
     </div>
 </div>
+
+<!-- Messages d'alerte -->
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="position-fixed top-50 start-50 translate-middle" style="z-index: 1050; min-width: 400px;">
+            <div class="alert alert-danger alert-dismissible fade show shadow-lg" role="alert">
+        {% elif message.tags == 'success' %}
+            <div class="position-fixed top-50 start-50 translate-middle" style="z-index: 1050; min-width: 400px;">
+            <div class="alert alert-success alert-dismissible fade show shadow-lg" role="alert">
+        {% else %}
+            <div class="position-fixed top-50 start-50 translate-middle" style="z-index: 1050; min-width: 400px;">
+            <div class="alert alert-info alert-dismissible fade show shadow-lg" role="alert">
+        {% endif %}
+                <div class="d-flex align-items-center">
+                    {% if message.tags == 'success' %}
+                        <i class="fas fa-check-circle me-3 fs-4"></i>
+                    {% else %}
+                        <i class="fas fa-exclamation-triangle me-3 fs-4"></i>
+                    {% endif %}
+                    <div class="flex-grow-1">
+                        {{ message }}
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <!-- Script pour gérer les champs vides et fermer les alertes -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fermeture automatique des alertes après 5 secondes
+            var alertList = document.querySelectorAll('.alert');
+            alertList.forEach(function(alert) {
+                var bsAlert = new bootstrap.Alert(alert);
+                setTimeout(function() {
+                    bsAlert.close();
+                }, 5000);
+            });
+
+            // Mise en évidence des champs vides
+            {% if champs_vides %}
+                // Ajouter la classe is-invalid aux champs vides
+                {% for champ in champs_vides %}
+                    var champInput = document.getElementById('{{ champ }}');
+                    if (champInput) {
+                        champInput.classList.add('is-invalid');
+                        // Ajouter un message d'erreur personnalisé
+                        var div = document.createElement('div');
+                        div.className = 'invalid-feedback';
+                        div.textContent = 'Ce champ est obligatoire';
+                        champInput.parentNode.insertBefore(div, champInput.nextSibling);
+                        
+                        // Focus sur le premier champ vide
+                        if ({{ forloop.first|yesno:'true,false' }}) {
+                            champInput.focus();
+                        }
+                    }
+                {% endfor %}
+                
+                // Faire défiler jusqu'au premier champ vide
+                var firstInvalid = document.querySelector('.is-invalid');
+                if (firstInvalid) {
+                    firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            {% endif %}
+
+            // Supprimer le style d'erreur quand l'utilisateur commence à saisir
+            document.querySelectorAll('input, textarea').forEach(function(input) {
+                input.addEventListener('input', function() {
+                    if (this.value.trim() !== '') {
+                        this.classList.remove('is-invalid');
+                        var feedback = this.nextElementSibling;
+                        if (feedback && feedback.classList.contains('invalid-feedback')) {
+                            feedback.remove();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+{% endif %}
+
+
 <!-- Script pour la validation du formulaire -->
 <script>
 // Exemple de validation JavaScript personnalisée

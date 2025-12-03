@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect 
 from authentification.models import Operateur
+import certificat
+from certificat.models import Sigle, CertificatAMC
+from django.contrib import messages
 
 def accueilCommerce(request):
     return render(request, 'service/commerce/accueilCommerce.html')
@@ -13,7 +16,37 @@ def accueilDemandeamc(request):
 
 def creerDemandeamc(request):
     operateurs = Operateur.objects.all().order_by('raison_sociale')
-    return render(request, 'service/commerce/amc/creerDemaneamc.html', {'operateurs':operateurs})
+    sigle = Sigle.objects.first()
+    numeroCertificat = str(CertificatAMC.objects.count() + 1).zfill(3)
+    context = {
+        'operateurs': operateurs,
+        'sigle': sigle,
+        'numeroCertificat': numeroCertificat,
+    }
+    if request.method == 'POST':
+        raisonSociale = request.POST.get("raisonSociale")
+        nif = request.POST.get("nif", "").strip()
+        adresse = request.POST.get("adresse", "").strip()
+        produit = request.POST.get("produit", "").strip()
+        pays = request.POST.get("pays", "").strip()
+        quantite = request.POST.get("quantite", "").strip()
+        unite = request.POST.get("unite", "").strip()
+        reference = request.POST.get("reference")
+        demandeN = request.POST.get("demandeN")
+        
+        CertificatAMC.objects.create(
+            operateur=Operateur.objects.get(raison_sociale=raisonSociale),
+            nom_marchandise=produit,
+            pays_origine=pays,
+            quantite=quantite,
+            etat="demande",
+            unite=unite,
+            reference=reference,
+            numero=demandeN,
+        )
+        messages.success(request, 'Demande AMC créée avec succès.')
+        return redirect('service:creerDemandeamc')
+    return render(request, 'service/commerce/amc/creerDemaneamc.html', context)
 
 def modifierDemandeamc(request):
     return render(request, 'service/commerce/amc/modifierDemandeamc.html')

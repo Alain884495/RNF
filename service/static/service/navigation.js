@@ -62,20 +62,20 @@ function closePopup() {
 /**
  * Gère la sélection d'un opérateur dans la liste de popup
  * @param {number} id - L'identifiant de l'opérateur
- * @param {string} entreprise - Le nom de l'entreprise
+ * @param {string} raisonSociale - Le nom de l'entreprise
  * @param {string} nif - Le numéro NIF de l'entreprise
- * @param {string} ville - La ville de l'entreprise
+ * @param {string} adresse - La ville de l'entreprise
  */
-function selectOperator(id, entreprise, nif, ville) {
+function selectOperator(id, raisonSociale, nif, adresse) {
     try {
         // Mise à jour des champs du formulaire principal
-        const raisonSociale = document.getElementById('raisonSociale');
+        const raisonSocialeField = document.getElementById('raisonSociale');
         const nifField = document.getElementById('nif');
-        const adresse = document.getElementById('adresse');
+        const adresseField = document.getElementById('adresse');
 
-        if (raisonSociale) raisonSociale.value = entreprise;
+        if (raisonSocialeField) raisonSocialeField.value = raisonSociale;
         if (nifField) nifField.value = nif;
-        if (adresse) adresse.value = ville;
+        if (adresseField) adresseField.value = adresse;
         
         // Mise en surbrillance de la ligne sélectionnée
         const rows = document.querySelectorAll('tbody tr');
