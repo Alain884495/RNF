@@ -1,0 +1,81 @@
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="position-fixed top-50 start-50 translate-middle" style="z-index: 1050; min-width: 400px;">
+            <div class="alert alert-danger alert-dismissible fade show shadow-lg" role="alert">
+        {% elif message.tags == 'success' %}
+            <div class="position-fixed top-50 start-50 translate-middle" style="z-index: 1050; min-width: 400px;">
+            <div class="alert alert-success alert-dismissible fade show shadow-lg" role="alert">
+        {% else %}
+            <div class="position-fixed top-50 start-50 translate-middle" style="z-index: 1050; min-width: 400px;">
+            <div class="alert alert-info alert-dismissible fade show shadow-lg" role="alert">
+        {% endif %}
+                <div class="d-flex align-items-center">
+                    {% if message.tags == 'success' %}
+                        <i class="fas fa-check-circle me-3 fs-4"></i>
+                    {% else %}
+                        <i class="fas fa-exclamation-triangle me-3 fs-4"></i>
+                    {% endif %}
+                    <div class="flex-grow-1">
+                        {{ message }}
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <!-- Script pour gérer les champs vides et fermer les alertes -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fermeture automatique des alertes après 5 secondes
+            var alertList = document.querySelectorAll('.alert');
+            alertList.forEach(function(alert) {
+                var bsAlert = new bootstrap.Alert(alert);
+                setTimeout(function() {
+                    bsAlert.close();
+                }, 5000);
+            });
+
+            // Mise en évidence des champs vides
+            {% if champs_vides %}
+                // Ajouter la classe is-invalid aux champs vides
+                {% for champ in champs_vides %}
+                    var champInput = document.getElementById('{{ champ }}');
+                    if (champInput) {
+                        champInput.classList.add('is-invalid');
+                        // Ajouter un message d'erreur personnalisé
+                        var div = document.createElement('div');
+                        div.className = 'invalid-feedback';
+                        div.textContent = 'Ce champ est obligatoire';
+                        champInput.parentNode.insertBefore(div, champInput.nextSibling);
+                        
+                        // Focus sur le premier champ vide
+                        if ({{ forloop.first|yesno:'true,false' }}) {
+                            champInput.focus();
+                        }
+                    }
+                {% endfor %}
+                
+                // Faire défiler jusqu'au premier champ vide
+                var firstInvalid = document.querySelector('.is-invalid');
+                if (firstInvalid) {
+                    firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            {% endif %}
+
+            // Supprimer le style d'erreur quand l'utilisateur commence à saisir
+            document.querySelectorAll('input, textarea').forEach(function(input) {
+                input.addEventListener('input', function() {
+                    if (this.value.trim() !== '') {
+                        this.classList.remove('is-invalid');
+                        var feedback = this.nextElementSibling;
+                        if (feedback && feedback.classList.contains('invalid-feedback')) {
+                            feedback.remove();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+{% endif %}

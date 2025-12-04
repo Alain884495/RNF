@@ -68,22 +68,8 @@
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    <script>
-        // Toggle password visibility
-        document.getElementById('togglePassword').addEventListener('click', function() {
-            const password = document.getElementById('password');
-            const icon = this.querySelector('i');
-            
-            if (password.type === 'password') {
-                password.type = 'text';
-                icon.classList.remove('bi-eye');
-                icon.classList.add('bi-eye-slash');
-            } else {
-                password.type = 'password';
-                icon.classList.remove('bi-eye-slash');
-                icon.classList.add('bi-eye');
-            }
-        });
-    </script>
+    
+    <!-- Scritp pour gestion de eye sur password -->
+    <script src="{% static 'jsspeciale/scriptEye.js' %}"></script>
 </body>
 </html>
